@@ -1,2 +1,2 @@
-#Dominic Ruano 
-django-admin startproject Proyecto3
+# Dominic Ruano 
+## django-admin startproject 
