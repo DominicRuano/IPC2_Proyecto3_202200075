@@ -4,11 +4,11 @@ import threading
 
 # Levantar backend
 def StartBackEnd():
-    os.system("python Proyecto_3/back.py")
+    os.system("python back/back.py")
 
 # Levantar backend
 def StartFrontEnd():
-    os.system("python Proyecto_3/manage.py runserver")
+    os.system("python front/manage.py runserver")
 
 # Corriendo
 thread1 = threading.Thread(target=StartBackEnd)
