@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front proyecto #3</title>
+</head>
+<body>
+
+    {% if existe %}
+        <h1>{{ idNombre_reporte }}</h1>
+        <p>{{ descripcion }}</p>
+        <p> {{ respuesta.message}} </p>
+
+        {% for valor in valores %}
+        <li> {{ valor }} </li>
+        {% endfor %}
+        <p>hola esto es un prueba.</p>
+
+    {% else %}
+        <P>No se encontraron datos.</P>
+    {% endif %}
+
+</body>
+</html>
