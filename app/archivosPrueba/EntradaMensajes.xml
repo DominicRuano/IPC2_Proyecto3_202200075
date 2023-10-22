@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <MENSAJES>
+        <MENSAJE>
+            <FECHA> Guatemala, 15/01/2023 15:25 hrs. </FECHA>
+            <TEXTO>
+                Bienvenido a usac @usuario01 @estudiante02,
+                es un gusto que sean parte de la institucion
+                #bienvenidaUSAC#
+            </TEXTO>
+        </MENSAJE>
+        <MENSAJE>
+            <FECHA>Guatemala, 13/01/2023 15:45 hrs.</FECHA>
+            <TEXTO>
+                Hola este es un twit @usuario01
+                #TWITTER#
+            </TEXTO>
+        </MENSAJE>
+    </MENSAJES>
+</config>
