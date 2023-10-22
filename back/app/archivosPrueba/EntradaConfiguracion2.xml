@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<diccionario>
+    <sentimientos_positivos>
+        <palabra>bueno2</palabra>
+        <palabra>excelente2</palabra>
+        <palabra>cool2</palabra>
+        <palabra>satisfecho2</palabra>
+        <palabra>cool2</palabra>
+        <palabra>malo</palabra>
+    </sentimientos_positivos>
+    <sentimientos_negativos>
+        <palabra>malo2</palabra>
+        <palabra>pesimo2</palabra>
+        <palabra>triste2</palabra>
+        <palabra>molesto2</palabra>
+        <palabra>desepcionado2</palabra>
+        <palabra>enojo2</palabra>
+        <palabra>bueno2</palabra>
+    </sentimientos_negativos>
+</diccionario>

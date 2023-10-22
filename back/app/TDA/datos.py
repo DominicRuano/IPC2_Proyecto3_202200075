@@ -15,7 +15,7 @@ class Datos():
 
     def leerDB(self):
         try:
-            root = ET.parse("app\\informacion\MensajesDB.xml").getroot()
+            root = ET.parse("back\\app\\informacion\MensajesDB.xml").getroot()
             for a in root.findall("MENSAJES"):
                 for mensaje in a.findall("MENSAJE"):
                     fecha = mensaje.find("FECHA")
@@ -27,7 +27,7 @@ class Datos():
             self.mensajes = []
 
         try:
-            root = ET.parse("app\\informacion\PalabrasDB.xml").getroot()
+            root = ET.parse("back\\app\\informacion\PalabrasDB.xml").getroot()
             for a in root.findall("diccionario"):
                 for mensaje in a.findall("positivas"):
                     for palabra in mensaje.findall("palabra"):
@@ -37,10 +37,11 @@ class Datos():
                         self.palabras.negativas.append(palabra.text)
                 for mensaje in a.findall("positivasrechazadas"):
                     for palabra in mensaje.findall("palabra"):
-                        self.palabras.positivas.append(palabra.text)
+                        self.palabras.positivasRechazadas.append(palabra.text)
                 for mensaje in a.findall("negativasrechazadas"):
                     for palabra in mensaje.findall("palabra"):
-                        self.palabras.positivas.append(palabra.text)
+                        self.palabras.negativasRechazadas.append(palabra.text)
+            
         except:
             print("No se detecto una DB de palabras")
             self.palabras.positivas = []
@@ -64,14 +65,14 @@ class Datos():
     def BuscarMensaje(self, fecha, contenido):
         try:
             for msj in self.mensajes:
-                if msj.fecha == fecha[0] and msj.texto == contenido:
+                if msj.fecha.lower() == fecha[0].lower() and msj.texto.lower() == contenido.lower():
                     return False
             return True
         except:
             print("Se detecto un error inesperado, uno de los mensajes no se agregara.")
 
     def guardarMensajes(self):
-        with open("app\\informacion\MensajesDB.xml", "w") as f:
+        with open("back\\app\\informacion\MensajesDB.xml", "w") as f:
             f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
             f.write("<config>\n")
             f.write("\t<MENSAJES>\n")
@@ -103,27 +104,27 @@ class Datos():
     def buscarConfiguracion(self, valor, clave):
         if clave == "positivas":
             for palabra in self.palabras.positivas:
-                if palabra == valor:
+                if palabra.lower() == valor.lower():
                     return False
             return True
         elif clave == "negativas":
             for palabra in self.palabras.negativas:
-                if palabra == valor:
+                if palabra.lower() == valor.lower():
                     return False
             return True
         elif clave == "negativasRechazadas":
             for palabra in self.palabras.negativasRechazadas:
-                if palabra == valor:
+                if palabra.lower() == valor.lower():
                     return False
             return True
         elif clave == "positivasRechazadas":
             for palabra in self.palabras.positivasRechazadas:
-                if palabra == valor:
+                if palabra.lower() == valor.lower():
                     return False
             return True
 
     def guardarConfiguraciones(self):
-        with open("app\\informacion\PalabrasDB.xml", "w") as f:
+        with open("back\\app\\informacion\PalabrasDB.xml", "w") as f:
             f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
             f.write("<config>\n")
             f.write("\t<diccionario>\n")
