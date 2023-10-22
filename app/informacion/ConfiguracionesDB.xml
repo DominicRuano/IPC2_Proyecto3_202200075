@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<diccionario>
+		<positivas>
+			<palabra>bueno</palabra>
+			<palabra>excelente</palabra>
+			<palabra>cool</palabra>
+			<palabra>satisfecho</palabra>
+		</positivas>
+		<negativas>
+			<palabra>malo</palabra>
+			<palabra>pesimo</palabra>
+			<palabra>triste</palabra>
+			<palabra>molesto</palabra>
+			<palabra>desepcionado</palabra>
+			<palabra>enojo</palabra>
+		</negativas>
+		<positivasrechazadas>
+		</positivasrechazadas>
+		<negativasrechazadas>
+		</negativasrechazadas>
+	</diccionario>
+</config>

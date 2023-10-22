@@ -1,6 +1,16 @@
 from TDA.datos import Datos
 
-obj = Datos("app\\archivosPrueba\EntradaMensajes.xml")
+#crear el objeto
+obj = Datos("app\\archivosPrueba\EntradaMensajes.xml","app\\archivosPrueba\EntradaConfiguracion.xml")
+
+#leer un archivo
 obj.leerMensajes()
 
-print("hello")
+#leer un archivo numero N
+obj.path[0] = "app\\archivosPrueba\EntradaMensajes2.xml"
+obj.leerMensajes()
+
+#leer configuraciones
+obj.leerConfiguraciones()
+
+print("")

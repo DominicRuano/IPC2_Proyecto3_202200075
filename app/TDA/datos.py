@@ -7,15 +7,143 @@ fechaRE = r'\b\d{2}/\d{2}/\d{4}\b'
 
 
 class Datos():
-    def __init__(self, path) -> None:
-        self.root = ET.parse(path).getroot()
+    def __init__(self, *args) -> None:
+        self.path = [*args]
         self.mensajes = []
         self.palabras = Palabras()
-    
+        self.leerDB()
+
+    def leerDB(self):
+        try:
+            root = ET.parse("app\\informacion\MensajesDB.xml").getroot()
+            for a in root.findall("MENSAJES"):
+                for mensaje in a.findall("MENSAJE"):
+                    fecha = mensaje.find("FECHA")
+                    fecha = re.findall(fechaRE, fecha.text)
+                    contenido = mensaje.find("TEXTO").text.replace("\t", "").replace("\n", "")
+                    self.mensajes.append(Mensaje(fecha[0], contenido))
+        except:
+            print("No se detecto una DB de mensajes")
+            self.mensajes = []
+
+        try:
+            root = ET.parse("app\\informacion\PalabrasDB.xml").getroot()
+            for a in root.findall("diccionario"):
+                for mensaje in a.findall("positivas"):
+                    for palabra in mensaje.findall("palabra"):
+                        self.palabras.positivas.append(palabra.text)
+                for mensaje in a.findall("negativas"):
+                    for palabra in mensaje.findall("palabra"):
+                        self.palabras.negativas.append(palabra.text)
+                for mensaje in a.findall("positivasrechazadas"):
+                    for palabra in mensaje.findall("palabra"):
+                        self.palabras.positivas.append(palabra.text)
+                for mensaje in a.findall("negativasrechazadas"):
+                    for palabra in mensaje.findall("palabra"):
+                        self.palabras.positivas.append(palabra.text)
+        except:
+            print("No se detecto una DB de palabras")
+            self.palabras.positivas = []
+            self.palabras.positivasRechazadas = []
+            self.palabras.negativas = []
+            self.palabras.negativasRechazadas = []
+
     def leerMensajes(self):
-        for a in self.root.findall("MENSAJES"):
+        root = ET.parse(self.path[0]).getroot()
+        for a in root.findall("MENSAJES"):
             for mensaje in a.findall("MENSAJE"):
                 fecha = mensaje.find("FECHA")
                 fecha = re.findall(fechaRE, fecha.text)
-                contenido = mensaje.find("TEXTO").text
-                self.mensajes.append(Mensaje(fecha, contenido.replace("  ", "").replace("\n", "")))
+                contenido = mensaje.find("TEXTO").text.replace("  ", "").replace("\n", "")
+                if self.BuscarMensaje(fecha, contenido):
+                    self.mensajes.append(Mensaje(fecha[0], contenido))
+                #else:
+                    #print(f"Mensaje rechazado: \nFecha: {fecha[0]} \nContenido: {contenido}")
+        self.guardarMensajes()
+
+    def BuscarMensaje(self, fecha, contenido):
+        try:
+            for msj in self.mensajes:
+                if msj.fecha == fecha[0] and msj.texto == contenido:
+                    return False
+            return True
+        except:
+            print("Se detecto un error inesperado, uno de los mensajes no se agregara.")
+
+    def guardarMensajes(self):
+        with open("app\\informacion\MensajesDB.xml", "w") as f:
+            f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            f.write("<config>\n")
+            f.write("\t<MENSAJES>\n")
+            for mensaje in self.mensajes:
+                f.write("\t\t<MENSAJE>\n")
+                f.write(f"\t\t\t<FECHA>{mensaje.fecha}</FECHA>\n")
+                f.write(f"\t\t\t<TEXTO>\n\t\t\t\t{mensaje.texto}\n\t\t\t</TEXTO>\n")
+                f.write("\t\t</MENSAJE>\n")
+            f.write("\t</MENSAJES>\n")
+            f.write("</config>")
+
+    def leerConfiguraciones(self):
+        root = ET.parse(self.path[1]).getroot()
+        for palabra in root.find("sentimientos_positivos"):
+            if self.buscarConfiguracion(palabra.text, "positivas"):
+                if self.buscarConfiguracion(palabra.text, "negativas"):
+                    self.palabras.positivas.append(palabra.text)
+                elif self.buscarConfiguracion(palabra.text, "positivasRechazadas"):
+                    self.palabras.positivasRechazadas.append(palabra.text)
+
+        for palabra in root.find("sentimientos_negativos"):
+            if self.buscarConfiguracion(palabra.text, "negativas"):
+                if self.buscarConfiguracion(palabra.text, "positivas"):
+                    self.palabras.negativas.append(palabra.text)
+                elif self.buscarConfiguracion(palabra.text, "negativasRechazadas"):
+                        self.palabras.negativasRechazadas.append(palabra.text)
+        self.guardarConfiguraciones()
+
+    def buscarConfiguracion(self, valor, clave):
+        if clave == "positivas":
+            for palabra in self.palabras.positivas:
+                if palabra == valor:
+                    return False
+            return True
+        elif clave == "negativas":
+            for palabra in self.palabras.negativas:
+                if palabra == valor:
+                    return False
+            return True
+        elif clave == "negativasRechazadas":
+            for palabra in self.palabras.negativasRechazadas:
+                if palabra == valor:
+                    return False
+            return True
+        elif clave == "positivasRechazadas":
+            for palabra in self.palabras.positivasRechazadas:
+                if palabra == valor:
+                    return False
+            return True
+
+    def guardarConfiguraciones(self):
+        with open("app\\informacion\PalabrasDB.xml", "w") as f:
+            f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            f.write("<config>\n")
+            f.write("\t<diccionario>\n")
+            f.write("\t\t<positivas>\n")
+            for palabra in self.palabras.positivas:
+                f.write(f"\t\t\t<palabra>{palabra}</palabra>\n")
+            f.write("\t\t</positivas>\n")
+            f.write("\t\t<negativas>\n")
+            for palabra in self.palabras.negativas:
+                f.write(f"\t\t\t<palabra>{palabra}</palabra>\n")
+            f.write("\t\t</negativas>\n")
+            f.write("\t\t<positivasrechazadas>\n")
+            for palabra in self.palabras.positivasRechazadas:
+                f.write(f"\t\t\t<palabra>{palabra}</palabra>\n")
+            f.write("\t\t</positivasrechazadas>\n")
+            f.write("\t\t<negativasrechazadas>\n")
+            for palabra in self.palabras.negativasRechazadas:
+                f.write(f"\t\t\t<palabra>{palabra}</palabra>\n")
+            f.write("\t\t</negativasrechazadas>\n")
+            f.write("\t</diccionario>\n")
+            f.write("</config>")
+
+
