@@ -1,5 +1,6 @@
 from flask import request, jsonify, Flask
 from flask_cors import CORS
+from app.app import *
 
 
 app = Flask(__name__)
@@ -25,6 +26,38 @@ def addUserByBody():
     miCurso = request.json["curso"]
     miSeccion = request.json["seccion"]
     return jsonify({"Aamessage":"Curso agregado", "Curso": miCurso, "Seccion":miSeccion})
+
+@app.route('/subir-mensajes', methods=['POST'])
+def subir_mensajes():
+    if 'archivo' not in request.files:
+        return jsonify({"message": "No se envio ningun archivo"})
+
+    archivo = request.files['archivo']
+
+    if archivo.filename == '':
+        return 'No se seleccionó ningún archivo'
+    
+    archivo.filename = "back\\app\\enviadoApi\\" + archivo.filename
+    archivo.save(archivo.filename)
+    leerMensajes(archivo.filename)
+    
+    return jsonify({"message": "El archivo se subio exitosamente"})
+
+@app.route('/subir-palabras', methods=['POST'])
+def subir_Palabras():
+    if 'archivo' not in request.files:
+        return jsonify({"message": "No se envio ningun archivo"})
+
+    archivo = request.files['archivo']
+
+    if archivo.filename == '':
+        return 'No se seleccionó ningún archivo'
+    
+    archivo.filename = "back\\app\\enviadoApi\\" + archivo.filename
+    archivo.save(archivo.filename)
+    leerConfig(archivo.filename)
+    
+    return jsonify({"message": "El archivo se subio exitosamente"})
 
 if __name__ == '__main__':
     app.run(debug=True, port=3050)

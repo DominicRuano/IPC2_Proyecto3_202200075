@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
-from TDA.palabras import Palabras
-from TDA.mensaje import Mensaje
+from app.TDA.palabras import Palabras
+from app.TDA.mensaje import Mensaje
 import re
 
 fechaRE = r'\b\d{2}/\d{2}/\d{4}\b'
