@@ -18,3 +18,48 @@ def getReporte(request):
     html = objTemplate.render({"existe": existen,"respuesta": Anwr.json(), 
                             "idNombre_reporte": reporteName, "descripcion": descripcion, "valores": conteo})
     return HttpResponse(html)
+
+def inicio(request):
+    objHTML = loader.get_template("Main.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def resetearDatos(request):
+    objHTML = loader.get_template("resetearDatos.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def cargarMensajes(request):
+    objHTML = loader.get_template("cargarMensajes.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def cargarConfiguraciones(request):
+    objHTML = loader.get_template("cargarConfiguracion.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def consultarHastags(request):
+    objHTML = loader.get_template("consultarHastags.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def consultarMenciones(request):
+    objHTML = loader.get_template("consultarMenciones.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def consultarSentimiento(request):
+    objHTML = loader.get_template("consultarSentimiento.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def Graficar(request):
+    objHTML = loader.get_template("graficar.html")
+    html = objHTML.render()
+    return HttpResponse(html)
+
+def Ayuda(request):
+    objHTML = loader.get_template("ayuda.html")
+    html = objHTML.render()
+    return HttpResponse(html)

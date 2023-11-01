@@ -13,6 +13,14 @@ class Datos():
         self.palabras = Palabras()
         self.leerDB()
 
+    def inicilizar(self):
+        self.path = ['','']
+        self.mensajes = []
+        self.palabras.positivas = []
+        self.palabras.positivasRechazadas = []
+        self.palabras.negativas = []
+        self.palabras.negativasRechazadas = []
+
     def leerDB(self):
         try:
             root = ET.parse("back\\app\\informacion\MensajesDB.xml").getroot()

@@ -16,10 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Proyecto_3.view import getInfo, getReporte
+from Proyecto_3.view import *
 
 urlpatterns = [
-    path("", getReporte),
+    path("", inicio),
     path('admin/', admin.site.urls),
-    path("getInfo/", getInfo)
+    path("getInfo/", getInfo),
+    path("reset/", resetearDatos),
+    path("cargarMensajes/", cargarMensajes),
+    path("cargarConfiguraciones/", cargarConfiguraciones),
+    path("consultarHastag/", consultarHastags),
+    path("consultarMenciones/", consultarMenciones),
+    path("consultarSentimientos/", consultarSentimiento),
+    path("Graficar/", Graficar),
+    path("Ayuda/", Ayuda),
 ]
