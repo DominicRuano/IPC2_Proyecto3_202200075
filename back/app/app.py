@@ -19,3 +19,7 @@ def limpiarDatos():
     obj.inicilizar()
     os.remove("back\\app\\informacion\\MensajesDB.xml")
     os.remove("back\\app\\informacion\\PalabrasDB.xml")
+
+def estaVacion():
+    global obj
+    return obj.vacio()

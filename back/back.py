@@ -50,5 +50,14 @@ def borrarDatos():
     except:
         return jsonify({"message": "Se produjo un error, es posible que la DB ya este vacia"})
 
+@app.route('/estaVacio', methods=['POST'])
+def siEstaVacio():
+    try:
+        if estaVacion():
+            return jsonify({"message": "Vacio"})
+        else:
+            return jsonify({"message": "No esta Vacio"})
+    except:
+        return jsonify({"message": "Error"})
 if __name__ == '__main__':
     app.run(debug=True, port=3050)

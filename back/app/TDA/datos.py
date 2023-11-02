@@ -13,6 +13,12 @@ class Datos():
         self.palabras = Palabras()
         self.leerDB()
 
+    def vacio(self):
+        if self.path == ['',''] and self.mensajes == [] and self.palabras.positivas == [] and self.palabras.positivasRechazadas == [] and self.palabras.negativas == [] and self.palabras.negativasRechazadas == []:
+            return False
+        else:
+            return True
+
     def inicilizar(self):
         self.path = ['','']
         self.mensajes = []

@@ -3,6 +3,49 @@
 {% block title %}Resetear Datos{% endblock %}
 
 {% block content %}
-    <h1>Se Inicializo el proyecto</h1>
-    <p>aun no se Inicializo...</p>
+<div class="position-absolute top-50 start-50 translate-middle">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p class="fs-1 fw-bold" style="white-space: nowrap;">Presiona el boton para Inicializar el sistema</p>
+        </blockquote>
+        <hr>
+        <form action="{% url 'boton_reset' %}">
+            {% if estaVacio %}
+            <button type="submit" class="btn btn-outline-danger">Inicializar</button>
+            {% else %}
+            <button type="submit" class="btn btn-outline-danger" disabled>Inicializar</button>
+            {% endif %}
+        </form>
+        <hr>
+        <figcaption class="blockquote-footer fs-10">
+            <cite title="Source Title">Si el botón está deshabilitado es porque el sistema ya se inicializó una vez y/o
+                no tiene ningún dato.</cite>
+        </figcaption>
+    </figure>
+    {% if valor %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // JavaScript para mostrar el toast cuando se detecta el valor
+        $(document).ready(function () {
+            $('#liveToast').toast('show');
+        });
+    </script>
+    <div class="toast-container position-fixed bottom-1 end-0 p-0">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-light">
+                <img class="rounded me-2">
+                <strong class="me-auto">Sistema de Inicializacion</strong>
+                <small>Ahora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body  bg-secondary text-light">
+                Sistema Inicializado correctamnte.
+            </div>
+        </div>
+    </div>
+    <p class="invisible">...</p>
+    {% else %}
+    <p class="invisible">.</p>
+    {% endif %}
+</div>
 {% endblock %}

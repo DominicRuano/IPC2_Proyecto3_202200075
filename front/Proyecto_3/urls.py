@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("getInfo/", getInfo),
     path("reset/", resetearDatos),
+    path("buttonReset/", buttonReset, name="boton_reset"),
     path("cargarMensajes/", cargarMensajes),
     path("cargarConfiguraciones/", cargarConfiguraciones),
     path("consultarHastag/", consultarHastags),
