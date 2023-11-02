@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<diccionario>
+		<positivas>
+			<palabra>bueno</palabra>
+			<palabra>excelente</palabra>
+			<palabra>cool</palabra>
+			<palabra>satisfecho</palabra>
+			<palabra>bueno2</palabra>
+			<palabra>excelente2</palabra>
+			<palabra>cool2</palabra>
+			<palabra>satisfecho2</palabra>
+		</positivas>
+		<negativas>
+			<palabra>malo</palabra>
+			<palabra>pesimo</palabra>
+			<palabra>triste</palabra>
+			<palabra>molesto</palabra>
+			<palabra>desepcionado</palabra>
+			<palabra>enojo</palabra>
+			<palabra>malo2</palabra>
+			<palabra>pesimo2</palabra>
+			<palabra>triste2</palabra>
+			<palabra>molesto2</palabra>
+			<palabra>desepcionado2</palabra>
+			<palabra>enojo2</palabra>
+		</negativas>
+		<positivasrechazadas>
+			<palabra>malo</palabra>
+		</positivasrechazadas>
+		<negativasrechazadas>
+			<palabra>cool</palabra>
+			<palabra>bueno2</palabra>
+		</negativasrechazadas>
+	</diccionario>
+</config>

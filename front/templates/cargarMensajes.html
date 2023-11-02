@@ -3,6 +3,48 @@
 {% block title %}Cargar Mensajes{% endblock %}
 
 {% block content %}
-    <h1>Aqui se van a poder cargar mensajes</h1>
-    <p>aun no se pueden cargar...</p>
+<div class="position-absolute top-50 start-50 translate-middle">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p class="fs-1 fw-bold" style="white-space: nowrap;">Seleccione el archivo para cargar mensajes</p>
+        </blockquote>
+        <hr>
+        <form action="{% url 'boton_mensaje' %}" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <input  type="file" name="archivo" id="formFile">
+                <button type="submit" class="btn btn-outline-danger">Enviar</button>
+            </div>
+        </form>
+        <hr>
+        <figcaption class="blockquote-footer fs-10">
+            <cite title="Source Title">Por favor solo agregue un archivo a la vez.</cite>
+        </figcaption>
+    </figure>
+
+    {% if estaVacio %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // JavaScript para mostrar el toast cuando se detecta el valor
+        $(document).ready(function () {
+            $('#liveToast').toast('show');
+        });
+    </script>
+    <div class="toast-container position-fixed bottom-1 end-0 p-0">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-light">
+                <img class="rounded me-2">
+                <strong class="me-auto">AVISO</strong>
+                <small>Ahora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body  bg-secondary text-light">
+                Se cargo el Archivo correctamnte.
+            </div>
+        </div>
+    </div>
+    <p class="invisible">...</p>
+    {% else %}
+    <p class="invisible">.</p>
+    {% endif %}
+</div>
 {% endblock %}
