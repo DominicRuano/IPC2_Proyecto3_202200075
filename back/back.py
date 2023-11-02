@@ -59,5 +59,15 @@ def siEstaVacio():
             return jsonify({"message": "No esta Vacio"})
     except:
         return jsonify({"message": "Error"})
+
+@app.route('/documentacion', methods=['GET'])
+def docu():
+    try:
+        documentacion()
+        return jsonify({"message": "Se abrira el archivo"})
+    except:
+        return jsonify({"message": "No se pudo abrir el archivo"})
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=3050)

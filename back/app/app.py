@@ -23,3 +23,7 @@ def limpiarDatos():
 def estaVacion():
     global obj
     return obj.vacio()
+
+def documentacion():
+    filepath = "Documentacion_Proyecto2_IPC2_202200075.pdf"
+    os.system(f"start {filepath}")

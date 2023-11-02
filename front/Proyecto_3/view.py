@@ -7,6 +7,7 @@ import requests
 
 seInicializo = False
 seCargoMensajes = False
+seInformacion = False
 
 def getInfo(request):
     return HttpResponse("Frontend: Estudiantes de ipc2")
@@ -161,6 +162,18 @@ def Graficar(request):
     return HttpResponse(html)
 
 def Ayuda(request):
+    global seInformacion
     objHTML = loader.get_template("ayuda.html")
-    html = objHTML.render()
+    html = objHTML.render({"valor": seInformacion})
+    seInformacion = False
     return HttpResponse(html)
+
+def info(request):
+    global seInformacion
+    seInformacion = True
+    return redirect("http://127.0.0.1:8000/Ayuda")
+
+def docu(request):
+    api_url = 'http://127.0.0.1:3050/documentacion'
+    requests.get(api_url)
+    return redirect("http://127.0.0.1:8000/Ayuda")

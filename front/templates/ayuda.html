@@ -3,6 +3,48 @@
 {% block title %}Ayuda{% endblock %}
 
 {% block content %}
-    <h1>Aqui se pueden obtener datos</h1>
-    <p>aun no se pueden obtener datos...</p>
+<div class="position-absolute top-50 start-50 translate-middle">
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <p class="fs-1 fw-bold" style="white-space: nowrap;">Presiona el boton para la funcion que desee</p>
+        </blockquote>
+        <hr>
+        <div class=" d-flex justify-content-center ">
+            <form action="{% url 'boton_ayuda' %}" class="me-2">
+                <button type="submit" class="btn btn-outline-danger">Informacion</button>
+            </form>
+            <form action="{% url 'documentacion' %}">
+                <button type="submit" class="btn btn-outline-danger">Documentacion</button>
+            </form>
+        </div>
+        <hr>
+    </figure>
+    {% if valor %}
+
+        <div class="p-3 mb-2 text-white bg-transparent justify-content-center rounded-5">
+            <label for="staticEmail" class="col-sm-1 ">Nombre</label>
+            <div class="p-3 mb-2 bg-secondary text-white rounded-5">
+                <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="Dominic Juan Pablo Ruano Perez">
+            </div>
+
+            <label for="staticEmail" class="col-sm-1 ">Carne</label>
+            <div class="p-3 mb-2 bg-secondary text-white rounded-5">
+                <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="202200075">
+            </div>
+
+            <label for="staticEmail" class="col-sm-1 ">Clase</label>
+            <div class="p-3 mb-2 bg-secondary text-white rounded-5">
+                <input type="text" readonly class="form-control-plaintext " id="staticEmail" value='Introduccion a la programacion y computacion 2 seccion  "N" '>
+            </div>
+
+            <label for="staticEmail" class="col-sm-1 ">Carrera</label>
+            <div class="p-3 mb-2 bg-secondary text-white rounded-5">
+                <input type="text" readonly class="form-control-plaintext " id="staticEmail" value="Ingenieria en Ciencias y Sistemas | 4To Semestre">
+            </div>
+        </div>
+
+    {% else %}
+    <p class="invisible">Nada</p>
+    {% endif %}
+</div>
 {% endblock %}
