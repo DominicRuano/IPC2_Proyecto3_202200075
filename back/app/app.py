@@ -35,3 +35,7 @@ def devovlerHas(fechas):
 def devovlerMen(fechas):
     global obj
     return obj.men(fechas)
+
+def devovlerSent(fechas):
+    global obj
+    return obj.sent(fechas)

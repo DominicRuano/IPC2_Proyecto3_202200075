@@ -216,4 +216,43 @@ class Datos():
             valor = ""
         return regrear
 
+    def sent(self, fechas):
+        valores = fechas.split(',')
+        contadorP = 0
+        contadorP2 = 0
+        contadorN = 0
+        contadorN2 = 0
+        ContadorNN2 = 0
+        regrear = []
+        valor = ""
+        for fecha in valores:
+            for mensaje in self.mensajes:
+                if fecha.replace("-", "/") == mensaje.fecha:
+                    for palabra in self.palabras.positivas:
+                        if fecha.replace("-", "/") == mensaje.fecha:
+                            hastags = re.findall(palabra, mensaje.texto)
+                            for a in hastags:
+                                contadorP += 1
+                    for palabra in self.palabras.negativas:
+                        if fecha.replace("-", "/") == mensaje.fecha:
+                            hastags = re.findall(palabra, mensaje.texto)
+                            for a in hastags:
+                                contadorN += 1
+                    if contadorP > contadorN:
+                        contadorP2 += 1
+                    elif contadorN > contadorP:
+                        contadorN2 +=1
+                    else:
+                        ContadorNN2 +=1
+                    contadorN = 0
+                    contadorP = 0
+            valor += "<ul> {'" + f"Positivos' : {contadorP2}" + "'}</ul>"
+            valor += "<ul> {'" + f"Negativos' : {contadorN2}" + "'}</ul>"
+            valor += "<ul> {'" + f"Neutros' : {ContadorNN2}" + "'}</ul>"
+            regrear.append(f"<li>{fecha}</li>\n {valor}")
+            valor = ""
+            contadorP2 = 0
+            contadorN2 = 0
+            ContadorNN2 = 0
+        return regrear
 

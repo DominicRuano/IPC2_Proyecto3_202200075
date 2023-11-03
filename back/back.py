@@ -82,6 +82,14 @@ def getMenciones(fechas):
     except:
         return jsonify({"message": "No se pudo abrir el archivo"})
 
+@app.route('/devolverSentimientos/<fechas>', methods=['GET'])
+def getSentimientos(fechas):
+    try:
+        return jsonify({"message": devovlerSent(fechas)})
+    except:
+        return jsonify({"message": "No se pudo abrir el archivo"})
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=3050)

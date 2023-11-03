@@ -222,9 +222,9 @@ def mencion(request):
                 html = objHTML.render({"valor": valor, "fechas": resultado})
                 return HttpResponse(html)
             else:
-                return redirect("http://127.0.0.1:8000/consultarMenciones/")
+                return redirect("http://127.0.0.1:8000/consultarMenciones")
             
-        return redirect("http://127.0.0.1:8000/consultarMenciones/")
+        return redirect("http://127.0.0.1:8000/consultarMenciones")
     except:
         return redirect("http://127.0.0.1:8000/consultarMenciones")
 
@@ -235,7 +235,7 @@ def sentimiento(request):
             # Accede a la lista de fechas desde el formulario
             fechas = request.POST.get("fechas").replace("/", "-")
 
-            api_url = f"http://127.0.0.1:3050/devolverMenciones/{fechas}"
+            api_url = f"http://127.0.0.1:3050/devolverSentimientos/{fechas}"
             
             response = requests.get(api_url, fechas)
 
@@ -247,8 +247,8 @@ def sentimiento(request):
                 html = objHTML.render({"valor": valor, "fechas": resultado})
                 return HttpResponse(html)
             else:
-                return redirect("http://127.0.0.1:8000/consultarMenciones/")
+                return redirect("http://127.0.0.1:8000/consultarSentimientos")
             
-        return redirect("http://127.0.0.1:8000/consultarMenciones/")
+        return redirect("http://127.0.0.1:8000/consultarSentimientos")
     except:
-        return redirect("http://127.0.0.1:8000/consultarMenciones")
+        return redirect("http://127.0.0.1:8000/consultarSentimientos")
