@@ -68,6 +68,13 @@ def docu():
     except:
         return jsonify({"message": "No se pudo abrir el archivo"})
 
+@app.route('/devolverHashtags/<fechas>', methods=['GET'])
+def getHastags(fechas):
+    try:
+        return jsonify({"message": devovlerHas(fechas)})
+    except:
+        return jsonify({"message": "No se pudo abrir el archivo"})
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=3050)

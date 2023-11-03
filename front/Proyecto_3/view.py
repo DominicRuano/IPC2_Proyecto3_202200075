@@ -177,3 +177,28 @@ def docu(request):
     api_url = 'http://127.0.0.1:3050/documentacion'
     requests.get(api_url)
     return redirect("http://127.0.0.1:8000/Ayuda")
+
+@csrf_exempt
+def fecha(request):
+    try:
+        if request.method == "POST":
+            # Accede a la lista de fechas desde el formulario
+            fechas = request.POST.get("fechas").replace("/", "-")
+
+            api_url = f"http://127.0.0.1:3050/devolverHashtags/{fechas}"
+            
+            response = requests.get(api_url, fechas)
+
+            if response.status_code == 200:
+                # Imprime el JSON de la respuesta
+                valor = True
+                resultado = response.json()['message']
+                objHTML = loader.get_template("consultarHastags.html")
+                html = objHTML.render({"valor": valor, "fechas": resultado})
+                return HttpResponse(html)
+            else:
+                return redirect("http://127.0.0.1:8000/consultarHastag")
+            
+        return redirect("http://127.0.0.1:8000/consultarHastag")
+    except:
+        return redirect("http://127.0.0.1:8000/consultarHastag")

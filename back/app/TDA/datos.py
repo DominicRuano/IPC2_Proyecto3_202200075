@@ -4,7 +4,8 @@ from app.TDA.mensaje import Mensaje
 import re
 
 fechaRE = r'\b\d{2}/\d{2}/\d{4}\b'
-
+hashtagRE = r'#(.*?)#'
+hashtagRE = r'@(.*?)'
 
 class Datos():
     def __init__(self, *args) -> None:
@@ -160,5 +161,34 @@ class Datos():
             f.write("\t\t</negativasrechazadas>\n")
             f.write("\t</diccionario>\n")
             f.write("</config>")
+
+    def has(self, fechas):
+        valores = fechas.split(',')
+        agregar = []
+        regrear = []
+        valor = ""
+
+        for fecha in valores:
+            for mensaje in self.mensajes:
+                if fecha.replace("-", "/") == mensaje.fecha:
+                    hastags = re.findall(hashtagRE, mensaje.texto)
+                    for a in hastags:
+                        indice = -1
+                        # Recorre la lista y busca la palabra
+                        for i, diccionario in enumerate(agregar):
+                            if a in diccionario:
+                                indice = i
+                                break
+                        if indice != -1:
+                            agregar[indice][a] += 1
+                        else:
+                            agregar.append({f"{a}": 1})
+            for i, diccionario in enumerate(agregar):
+                valor += f"<ul>{diccionario}</ul>"
+            regrear.append(f"<li>{fecha}</li>\n {valor}")
+            agregar = []
+            valor = ""
+
+        return regrear
 
 
