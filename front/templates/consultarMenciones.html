@@ -1,8 +1,70 @@
 {% extends "plantilla.html" %}
 
-{% block title %}Consultar Menciones{% endblock %}
+{% block title %}Consultar Menciones {% endblock %}
 
 {% block content %}
-    <h1>Aqui se pueden consultar Menciones</h1>
-    <p>aun no se pueden consultar Menciones...</p>
+<blockquote class="blockquote text-center">
+    <p class="fs-1 fw-bold" style="white-space: nowrap;">Ingrese el intervalo para la busqueda.</p>
+</blockquote>
+<form class="d-flex justify-content-center" action="{% url 'boton_menciones' %}" method="POST" enctype="multipart/form-data">
+    <div class=" d-flex align-items-center ">
+        &nbsp;&nbsp;
+        <label for="fecha-inicio">Fecha de Inicio:</label>
+        <input type="date" id="fecha-inicio" name="fecha-inicio">
+        &nbsp;&nbsp;
+        <label for="fecha-final">Fecha Final:</label>
+        <input type="date" id="fecha-final" name="fecha-final">
+
+        <input type="hidden" name="fechas" id="fechas" value="">
+        <div class="mb-3">
+            &nbsp;&nbsp;
+            <button type="submit" class="btn btn-outline-danger" onclick="calcularFechas()">Enviar</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+{% if valor %}
+
+<div id="fechas">
+    <ul>
+        {% for item in fechas %}
+            {{ item | safe }}
+        {% endfor %}
+    </ul>
+</div>
+
+{% else %}
+<p class="">.</p>
+{% endif %}
+
+
+<script>
+    function calcularFechas() {
+        var fechaInicio = new Date(document.getElementById("fecha-inicio").value);
+        var fechaFinal = new Date(document.getElementById("fecha-final").value);
+
+        if (fechaInicio > fechaFinal) {
+            alert("La fecha de inicio no puede ser posterior a la fecha final.");
+            return;
+        }
+
+        var fechas = [];
+        var currentDate = new Date(fechaInicio);
+
+        while (currentDate <= fechaFinal) {
+            currentDate.setDate(currentDate.getDate() + 1);
+            fechas.push(currentDate.toLocaleDateString("en-GB"));
+        }
+
+        // Almacena la lista de fechas en el campo oculto "fechas"
+        document.getElementById("fechas").value = fechas.join(',');
+
+        // Ahora puedes enviar el formulario
+        document.querySelector("form").submit();
+    }
+
+</script>
 {% endblock %}

@@ -75,6 +75,13 @@ def getHastags(fechas):
     except:
         return jsonify({"message": "No se pudo abrir el archivo"})
 
+@app.route('/devolverMenciones/<fechas>', methods=['GET'])
+def getMenciones(fechas):
+    try:
+        return jsonify({"message": devovlerMen(fechas)})
+    except:
+        return jsonify({"message": "No se pudo abrir el archivo"})
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=3050)

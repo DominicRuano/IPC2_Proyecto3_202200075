@@ -202,3 +202,53 @@ def fecha(request):
         return redirect("http://127.0.0.1:8000/consultarHastag")
     except:
         return redirect("http://127.0.0.1:8000/consultarHastag")
+
+@csrf_exempt
+def mencion(request):
+    try:
+        if request.method == "POST":
+            # Accede a la lista de fechas desde el formulario
+            fechas = request.POST.get("fechas").replace("/", "-")
+
+            api_url = f"http://127.0.0.1:3050/devolverMenciones/{fechas}"
+            
+            response = requests.get(api_url, fechas)
+
+            if response.status_code == 200:
+                # Imprime el JSON de la respuesta
+                valor = True
+                resultado = response.json()['message']
+                objHTML = loader.get_template("consultarMenciones.html")
+                html = objHTML.render({"valor": valor, "fechas": resultado})
+                return HttpResponse(html)
+            else:
+                return redirect("http://127.0.0.1:8000/consultarMenciones/")
+            
+        return redirect("http://127.0.0.1:8000/consultarMenciones/")
+    except:
+        return redirect("http://127.0.0.1:8000/consultarMenciones")
+
+@csrf_exempt
+def sentimiento(request):
+    try:
+        if request.method == "POST":
+            # Accede a la lista de fechas desde el formulario
+            fechas = request.POST.get("fechas").replace("/", "-")
+
+            api_url = f"http://127.0.0.1:3050/devolverMenciones/{fechas}"
+            
+            response = requests.get(api_url, fechas)
+
+            if response.status_code == 200:
+                # Imprime el JSON de la respuesta
+                valor = True
+                resultado = response.json()['message']
+                objHTML = loader.get_template("consultarSentimiento.html")
+                html = objHTML.render({"valor": valor, "fechas": resultado})
+                return HttpResponse(html)
+            else:
+                return redirect("http://127.0.0.1:8000/consultarMenciones/")
+            
+        return redirect("http://127.0.0.1:8000/consultarMenciones/")
+    except:
+        return redirect("http://127.0.0.1:8000/consultarMenciones")

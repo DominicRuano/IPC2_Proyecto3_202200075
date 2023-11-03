@@ -36,4 +36,6 @@ urlpatterns = [
     path("buttonAyuda/", info, name="boton_ayuda"),
     path("documentacion/", docu, name="documentacion"),
     path("fechas/", fecha, name="boton_fechas"),
+    path("menciones/", mencion, name="boton_menciones"),
+    path("sentimientos/", sentimiento, name="boton_sentimiento"),
 ]

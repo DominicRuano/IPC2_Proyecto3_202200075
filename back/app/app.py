@@ -31,3 +31,7 @@ def documentacion():
 def devovlerHas(fechas):
     global obj
     return obj.has(fechas)
+
+def devovlerMen(fechas):
+    global obj
+    return obj.men(fechas)
