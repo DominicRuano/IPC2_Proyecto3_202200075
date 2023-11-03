@@ -25,7 +25,7 @@ def estaVacion():
     return obj.vacio()
 
 def documentacion():
-    filepath = "Documentacion_Proyecto2_IPC2_202200075.pdf"
+    filepath = "Documentacion_Proyecto3_IPC2_202200075.pdf"
     os.system(f"start {filepath}")
 
 def devovlerHas(fechas):
